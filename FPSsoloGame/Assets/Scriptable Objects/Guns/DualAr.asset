@@ -26,3 +26,4 @@ MonoBehaviour:
   dualWeild: 1
   isShotgun: 0
   pelletsPerSpread: 0
+  gunSound: ar

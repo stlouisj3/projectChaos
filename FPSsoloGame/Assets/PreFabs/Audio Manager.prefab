@@ -1130,6 +1130,12 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: f0ca5b40adff65d4b8658f9df0f4aaa3, type: 3}
   - name: click
     clip: {fileID: 8300000, guid: 57fa41e1a2a01c8408de7a458be4de8b, type: 3}
+  - name: playerHurt
+    clip: {fileID: 8300000, guid: 36ea01503db628b419c585f1fb20426a, type: 3}
+  - name: playerWalk
+    clip: {fileID: 8300000, guid: 1dcf0e4ca88ddfc4abb6150154ce4435, type: 3}
+  - name: newRound
+    clip: {fileID: 8300000, guid: 94dd829881726a8408a328528de1f089, type: 3}
   musicSource: {fileID: 6614469575240422433}
   sfxSource: {fileID: 6614469575256328622}
   gunSource: {fileID: 6614469575140781471}

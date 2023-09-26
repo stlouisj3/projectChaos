@@ -435,6 +435,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4595533c9e646db4d9d84b732c6c518c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveDistance: 1000000
+  attackDistance: 2
 --- !u!206 &5293024300563166828
 BlendTree:
   m_ObjectHideFlags: 1

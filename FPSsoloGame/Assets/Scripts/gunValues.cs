@@ -32,4 +32,6 @@ public class gunValues : ScriptableObject
 
     public int pelletsPerSpread;
 
+    public string gunSound;
+
 }

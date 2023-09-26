@@ -48,8 +48,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private InputManager input;
 
+    audioManager audioSfx;
+
     public delegate void move();
     public static move moveStart;
+
+    private bool walkSound = true;
 
 
     void Awake()
@@ -57,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
         jumpReset();
         moveStart = startMove;
+        audioSfx = audioManager.Instance;
     }
 
 
@@ -130,7 +135,15 @@ public class PlayerMovement : MonoBehaviour
         }
 
    
-
+    IEnumerator playWalkSound()
+    {
+        walkSound = true;
+        float reverb = Random.Range(0, 101);
+        reverb /= 100;
+        audioSfx.PlayPlayerSound("playerWalk", reverb);
+        yield return new WaitForSeconds(.2f);
+        walkSound = false;
+    }
     
     private void movePlayer()
     {
@@ -138,7 +151,10 @@ public class PlayerMovement : MonoBehaviour
         movement2d = input.getPlayerMovement();
         movement3d = (orientation.right * movement2d.x + orientation.forward * movement2d.y);
         //movement = orientation.forward * inputY + orientation.right * inputX;
-
+        if(movement2d != Vector2.zero && !walkSound)
+        {
+            StartCoroutine(playWalkSound());
+        }
         
 
         if (grounded)

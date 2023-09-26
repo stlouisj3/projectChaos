@@ -27,9 +27,25 @@ public class AmmoUI : MonoBehaviour
     private Slider health;
     [SerializeField]
     private Image damgeImg;
+    [SerializeField]
+    private Image incImg;
 
     private Color trans;
     private Color opaq;
+
+    [SerializeField]
+    private Sprite forcePush;
+    [SerializeField]
+    private Sprite opeOpe;
+    [SerializeField]
+    private Sprite timeFreeze;
+    [SerializeField]
+    private Sprite conqHaki;
+    [SerializeField]
+    private Sprite sheild;
+    [SerializeField]
+    private Sprite laser;
+
 
 
 
@@ -46,7 +62,13 @@ public class AmmoUI : MonoBehaviour
     public static activateAbility abil1;
     public static activateAbility abil2;
 
-    public delegate IEnumerator newHealth(int arg, int arg2);
+    public delegate void setAbil1Sprite(ability1 arg);
+    public static setAbil1Sprite setSprite1;
+    public delegate void setAbil2Sprite(ability2 arg);
+    public static setAbil2Sprite setSprite2;
+
+
+    public delegate IEnumerator newHealth(int arg, int arg2,bool arg3);
     public static newHealth updateHealth;
 
 
@@ -55,6 +77,9 @@ public class AmmoUI : MonoBehaviour
         currentAmmo = UpdateCurrAmmo;
         resAmmo = UpdateReserveAmmo;
         dualWeildAmmo = UpdateDualAmmo;
+
+        setSprite1 = setAbil1Img;
+        setSprite2 = setAbil2Img;
 
         dualOn = turnOnDual;
         dualOff = turnOffDual;
@@ -71,6 +96,7 @@ public class AmmoUI : MonoBehaviour
         opaq.a = 1;
 
         damgeImg.color = trans;
+        incImg.color = trans;
         health.value = 1;
 
     }
@@ -117,6 +143,8 @@ public class AmmoUI : MonoBehaviour
 
     private void changeAbility2(bool arg)
     {
+
+
         if (arg)
         {
             ability2.color = Color.green;
@@ -127,10 +155,48 @@ public class AmmoUI : MonoBehaviour
         }
     }
 
-
-    IEnumerator changeHealth(int arg, int maxHealth)
+    private void setAbil1Img (ability1 abil)
     {
-        damgeImg.color = opaq;
+        switch (abil)
+        {
+            case global::ability1.teleport:
+                ability1.sprite = opeOpe;
+                break;
+
+            case global::ability1.heal:
+                ability1.sprite = sheild;
+                break;
+            case global::ability1.freeze:
+                ability1.sprite = timeFreeze;               
+                break;
+        }
+
+    }
+
+    private void setAbil2Img(ability2 abil)
+    {
+        switch (abil)
+        {
+            case global::ability2.debris:
+                ability2.sprite = forcePush;
+                break;
+
+            case global::ability2.laser:
+                ability2.sprite = laser;
+                break;
+            case global::ability2.quake:
+                ability2.sprite = conqHaki;
+                break;
+        }
+
+    }
+
+    IEnumerator changeHealth(int arg, int maxHealth, bool dec)
+    {
+        if (dec)
+            damgeImg.color = opaq;
+        else
+            incImg.color = opaq;
         health.value = (float)arg / maxHealth;
 
         float elapsedTime = 0;
@@ -140,10 +206,13 @@ public class AmmoUI : MonoBehaviour
         while (elapsedTime < totalTime)
         {
             elapsedTime += Time.deltaTime;
-            damgeImg.color = Color.Lerp(opaq, trans, elapsedTime / totalTime);
+            if(dec)
+                damgeImg.color = Color.Lerp(opaq, trans, elapsedTime / totalTime);
+            else
+                incImg.color = Color.Lerp(opaq, trans, elapsedTime / totalTime);
             yield return new WaitForEndOfFrame();
         }
-
+        incImg.color = trans;
         damgeImg.color = trans;
 
 

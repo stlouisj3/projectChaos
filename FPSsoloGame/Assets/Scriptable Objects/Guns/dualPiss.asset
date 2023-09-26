@@ -15,9 +15,9 @@ MonoBehaviour:
   gunName: Test
   clipSize: 12
   startAmmo: 46
-  currAmmo: 6
-  dualAmmo: 0
-  reserveAmmo: 0
+  currAmmo: 12
+  dualAmmo: 8
+  reserveAmmo: 46
   reloadTime: 0.45
   dmg: 20
   spreadRadius: 1
@@ -26,3 +26,4 @@ MonoBehaviour:
   dualWeild: 1
   isShotgun: 0
   pelletsPerSpread: 0
+  gunSound: pistol

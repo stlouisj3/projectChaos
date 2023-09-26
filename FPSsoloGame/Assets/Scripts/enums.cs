@@ -11,3 +11,8 @@ public enum ability2
 {
     debris, quake, laser
 }
+
+public enum powerUpType
+{
+    ammo,health
+}

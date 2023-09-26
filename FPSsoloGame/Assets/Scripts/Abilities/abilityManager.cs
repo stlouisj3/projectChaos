@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class abilityManager : MonoBehaviour
 {
@@ -39,6 +41,7 @@ public class abilityManager : MonoBehaviour
     public classScriptObj abilitiy;
 
     private ObjectPool pool;
+    private audioManager audio;
 
 
     Vector3[] positions = new Vector3[2];
@@ -67,18 +70,58 @@ public class abilityManager : MonoBehaviour
     private float laserCoolDown = 5f;
 
 
+    [SerializeField]
+    private Volume vol;
+
+    private ColorAdjustments effect;
+
+    private float Starthue;
+
+    
+    private float randomHue;
+
+    private float startSat;
+    private float greySat = -100;
 
 
     //private GameObject temp;
 
     void Start()
     {
+        if (vol != null)
+        {
+            Debug.Log("Volume component found!");
+            if (vol.profile.TryGet(out effect))
+            {
+                //Debug.Log("Color Adjustments found!");
+                startSat = effect.saturation.value;
+                Starthue = effect.hueShift.value;
+
+                
+            }
+            else
+            {
+                Debug.LogError("Color Adjustments not found!");
+            }
+        }
+        else
+        {
+            Debug.LogError("Volume component not assigned!");
+        }
+        audio = audioManager.Instance;
         pool = ObjectPool.Instance;
         ready1 = true;
         ready2 = true;
         getInput = abilityCheck;
+        
         AmmoUI.abil2(ready2);
         AmmoUI.abil1(ready1);
+        AmmoUI.setSprite1(abilitiy.abil1);
+        AmmoUI.setSprite2(abilitiy.abil2);
+
+        //effect = vol.GetComponent<ColorAdjustments>();
+        
+
         //abilityCheck();
     }
 
@@ -184,9 +227,24 @@ public class abilityManager : MonoBehaviour
 
     private void conqHaki()
     {
+        
+        audio.Playability2("conq");
+        StartCoroutine(conqEffect());
         animationController.stumble(true);
         ready2 = false;
         StartCoroutine(coolDownAbil2(hakiCoolDown));
+    }
+
+    IEnumerator conqEffect()
+    {
+        randomHue = Random.Range(-180, -20);
+
+        effect.hueShift.value = randomHue;
+            yield return new WaitForSeconds(.5f);
+        
+
+        effect.hueShift.value = Starthue;
+
     }
 
     private void timeStop()
@@ -198,13 +256,15 @@ public class abilityManager : MonoBehaviour
 
     IEnumerator stopTime()
     {
+        effect.saturation.value = greySat;
         animationController.stopTime(true);
         navMeshFix.changeNav(false);
-       
+        
         yield return new WaitForSeconds(pauseTime);
-       
+        effect.saturation.value = startSat;
         animationController.stopTime(false);
         navMeshFix.changeNav(true);
+        
     }
 
     private void laserBeam()
@@ -276,6 +336,8 @@ public class abilityManager : MonoBehaviour
 
             if (input.getAbilityOne() && ready1)
             {
+                //AmmoUI.setSprite1(abilitiy.abil1);
+                
                 switch (abilitiy.abil1)
                 {
                     case ability1.teleport:
@@ -294,6 +356,7 @@ public class abilityManager : MonoBehaviour
 
             if (input.getAbilityTwo() && ready2)
             {
+                //AmmoUI.setSprite2(abilitiy.abil2);
                 switch (abilitiy.abil2)
                 {
                     case ability2.debris:

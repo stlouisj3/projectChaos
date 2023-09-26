@@ -52,6 +52,7 @@ public class shootingScript : MonoBehaviour
     private int ammoNeeded;
 
     ObjectPool pool;
+    audioManager audio;
 
     public classScriptObj gunClass;
 
@@ -60,9 +61,11 @@ public class shootingScript : MonoBehaviour
 
     public delegate void turnOff(float arg);
     public static turnOff gunsOff;
+    public static turnOff addAmmo;
 
     void Start()
     {
+        audio = audioManager.Instance;
         pool = ObjectPool.Instance;
         shooting = false;
         dualShoot = false;
@@ -72,6 +75,7 @@ public class shootingScript : MonoBehaviour
         setGuns();
         startShoot = shootCheck;
         gunsOff = noGuns;
+        addAmmo = addResAmmo;
     }
 
     private void shootCheck()
@@ -278,6 +282,7 @@ public class shootingScript : MonoBehaviour
                 dualShoot = true;
             }
             
+            audio.PlayGun(gun.gunSound);
             //pool.SpawnFromPool("MuzzleFlash", actBarrel.position, Quaternion.identity);
             if (gun.isShotgun)
             {
@@ -395,6 +400,7 @@ public class shootingScript : MonoBehaviour
 
     private IEnumerator reload()
     {
+        audio.PlayGun("reload");
         ani1.SetBool("reload", true);
         if (ani2 != null)
             ani2.SetBool("reload", true);
@@ -445,10 +451,15 @@ public class shootingScript : MonoBehaviour
             AmmoUI.dualWeildAmmo(gun.dualAmmo);
         }
         AmmoUI.currentAmmo(gun.currAmmo);
-        AmmoUI.resAmmo(gun.reserveAmmo);
+        
 
     }
 
+    private void addResAmmo(float arg)
+    {
+        gun.reserveAmmo += (int)arg;
+        AmmoUI.resAmmo(gun.reserveAmmo);
+    }
     private IEnumerator callHitmarker()
     {
         hitmarker.SetActive(true);

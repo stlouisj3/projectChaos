@@ -12,9 +12,11 @@ public class RunState : StateMachineBehaviour
     
     private Transform player;
 
-    
+    [SerializeField]
     private float moveDistance = 15f;
-    
+
+
+    [SerializeField]
     private float attackDistance = 2f;
     
 
@@ -23,6 +25,8 @@ public class RunState : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
    {
         agent = animator.GetComponent<NavMeshAgent>();
+        if(agent == null)
+            agent = animator.GetComponentInParent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         
     }

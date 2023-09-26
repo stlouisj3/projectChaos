@@ -21,6 +21,13 @@ public class playerHealth : MonoBehaviour
     public static addHealth restoreFull;
     public static addHealth maxUpgrade;
 
+    audioManager audioSfx;
+
+    private void Awake()
+    {
+        audioSfx = audioManager.Instance;
+    }
+
     private void Start()
     {
         upHealth = changeHealth;
@@ -35,11 +42,17 @@ public class playerHealth : MonoBehaviour
         {
             
         }
-        else
+        else if(arg > 0)
         {
             health += arg;
-            StartCoroutine(AmmoUI.updateHealth(health, maxHealth));
+            StartCoroutine(AmmoUI.updateHealth(health, maxHealth,false));
             StartCoroutine(enableInvince(1));
+        }else if(arg < 0)
+        {
+            if (health > maxHealth)
+                health = maxHealth;
+            StartCoroutine(AmmoUI.updateHealth(health, maxHealth,true));
+            audioSfx.PlayPlayerSound("playerHurt", 1);
         }
         
         if(health < 0)

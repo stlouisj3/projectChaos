@@ -168,6 +168,22 @@ public class audioManager : MonoBehaviour
             ability2Source.Play();
         }
     }
+
+    public void PlayPlayerSound(string name,float reverb)
+    {
+        Sound s = Array.Find(sfxSounds, Matrix4x4 => Matrix4x4.name == name);
+
+        if (s == null)
+        {
+            Debug.Log("Sound Not Found");
+        }
+        else
+        {
+            playerSource.clip = s.clip;
+            playerSource.reverbZoneMix = reverb;
+            playerSource.Play();
+        }
+    }
     public void pauseMusic()
     {
         musicSource.Pause();

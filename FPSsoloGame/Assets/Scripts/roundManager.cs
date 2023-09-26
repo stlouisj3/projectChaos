@@ -54,7 +54,11 @@ public class roundManager : MonoBehaviour
 
     private Transform spawnTrans;
 
-    
+    [SerializeField]
+    private List<string> enemyNames;
+    private int enemyType;
+
+    audioManager audio;
 
     [SerializeField]
     private List<area> areas;
@@ -69,7 +73,8 @@ public class roundManager : MonoBehaviour
         enemyCheck += enemyDied;
         stopSpawn = pauseSpawning;
         continueSpawn = resumeSpawning;
-        pool = ObjectPool.Instance; 
+        pool = ObjectPool.Instance;
+        audio = audioManager.Instance;
     }
 
     void OnEnable()
@@ -90,7 +95,7 @@ public class roundManager : MonoBehaviour
     
     private void startRound()
     {
-        
+        audio.PlaySFX("newRound");
         round++;
         enemiesDead = 0;
         enemiesSpawned =  0;
@@ -106,12 +111,14 @@ public class roundManager : MonoBehaviour
         while(enemiesSpawned < maxSpawn)
         {
             yield return new WaitForSeconds(timeToSpawn);
-            Debug.Log(enemiesSpawned + " " + maxSpawn);
+            
             areaSpawn = Random.Range(0, areasOpen);
             pointsToSpawn = areas[areaSpawn].spawnPoints.Count;
             spawnPoint = Random.Range(0, pointsToSpawn);
             spawnTrans = areas[areaSpawn].spawnPoints[spawnPoint];
-            pool.SpawnFromPool("Enemy", spawnTrans.position, Quaternion.identity);
+            enemyType = Random.Range(0, enemyNames.Count);
+
+            pool.SpawnFromPool(enemyNames[enemyType], spawnTrans.position, Quaternion.identity);
             enemiesSpawned = enemiesSpawned + 1;
 
         }
@@ -121,7 +128,20 @@ public class roundManager : MonoBehaviour
     }
 
     
+    IEnumerator bossSpawn()
+    {
+        int spawnTimes = round / openRnds;
 
+        for(int i = 0; i < spawnTimes; i++)
+        {
+            int areasSpawn = Random.Range(0, areasOpen);
+            int pointsToSpawns = areas[areasSpawn].spawnPoints.Count;
+            int spawnsPoint = Random.Range(0, pointsToSpawns);
+            Transform spawnsTrans = areas[areasSpawn].spawnPoints[spawnsPoint];
+            yield return new WaitForSeconds(1);
+            pool.SpawnFromPool("Boss", spawnsTrans.position, Quaternion.identity); 
+        }
+    }
 
     IEnumerator roundWait() 
     {
@@ -163,7 +183,11 @@ public class roundManager : MonoBehaviour
     private void openNewArea()
     {
 
-        
+        if(round > 1)
+        {
+            StartCoroutine(bossSpawn());
+        }
+
         if(areasOpen < areas.Count)
         {   
             areasOpen++;

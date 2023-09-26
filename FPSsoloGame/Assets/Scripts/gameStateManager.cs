@@ -17,8 +17,11 @@ public class gameStateManager : MonoBehaviour
     public static gameState pauseGame;
     public static gameState dead;
 
+    audioManager audio;
+
     IEnumerator Start()
     {
+        audio = audioManager.Instance;
         play = true;
         deathScreen.SetActive(false);
         yield return new WaitForEndOfFrame();
@@ -40,9 +43,12 @@ public class gameStateManager : MonoBehaviour
     private void pause()
     {
         play = false;
+        audio.pauseMusic();
+        roundManager.stopSpawn();
         animationController.stopTime(true);
         navMeshFix.changeNav(false);
-        roundManager.stopSpawn();
+        
+        
     }
 
     private void resume()
@@ -51,11 +57,12 @@ public class gameStateManager : MonoBehaviour
         PlayerMovement.moveStart();
         shootingScript.startShoot();
         CameraControl.camMove();       
-        
+        StartCoroutine(audio.resumeShuffle());
         roundManager.continueSpawn();
         abilityManager.getInput();
         animationController.stopTime(false);
         navMeshFix.changeNav(true);
+        
     }
 
     private void death()

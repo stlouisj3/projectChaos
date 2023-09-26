@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c04b30bd2281aa84983d707f76da9e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveDistance: 100
+  moveDistance: 100000000
   attackDistance: 2
 --- !u!1101 &-6789633140519999075
 AnimatorStateTransition:
@@ -435,6 +435,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4595533c9e646db4d9d84b732c6c518c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveDistance: 100000
+  attackDistance: 2
 --- !u!206 &5293024300563166828
 BlendTree:
   m_ObjectHideFlags: 1

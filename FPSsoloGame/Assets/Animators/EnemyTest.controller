@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c04b30bd2281aa84983d707f76da9e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveDistance: 25
+  moveDistance: 100000000
   attackDistance: 2
 --- !u!1101 &-6789633140519999075
 AnimatorStateTransition:
@@ -165,31 +165,31 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Idle
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Attack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Blend
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Stumble
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -435,6 +435,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4595533c9e646db4d9d84b732c6c518c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveDistance: 15
+  attackDistance: 2
 --- !u!206 &5293024300563166828
 BlendTree:
   m_ObjectHideFlags: 1

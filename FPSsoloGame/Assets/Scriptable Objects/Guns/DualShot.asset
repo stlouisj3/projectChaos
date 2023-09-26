@@ -26,3 +26,4 @@ MonoBehaviour:
   dualWeild: 1
   isShotgun: 1
   pelletsPerSpread: 4
+  gunSound: shotgun

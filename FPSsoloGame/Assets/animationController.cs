@@ -11,6 +11,8 @@ public class animationController : MonoBehaviour
     public static changeState stumble;
     public static changeState stopTime;
 
+    bool stopAni = false;
+
     private void Start()
     {
         stumble += setStumble;
@@ -39,7 +41,17 @@ public class animationController : MonoBehaviour
 
     private void pause(bool arg)
     {
+        stopAni = arg;
+
         if (arg)
+            animator.speed = 0f;
+        else
+            animator.speed = 1f;
+    }
+
+    private void Update()
+    {
+        if (stopAni)
             animator.speed = 0f;
         else
             animator.speed = 1f;

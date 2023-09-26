@@ -97,7 +97,7 @@ LineRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 0.027954131, b: 0, a: 1}
-      key1: {r: 0.11320752, g: 0, b: 0, a: 1}
+      key1: {r: 0.11320752, g: 0, b: 0, a: 0.67058825}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -112,8 +112,8 @@ LineRenderer:
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 0
-      atime1: 65535
+      atime0: 17540
+      atime1: 43947
       atime2: 0
       atime3: 0
       atime4: 0
