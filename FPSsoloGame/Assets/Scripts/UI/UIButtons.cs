@@ -121,4 +121,13 @@ public class UIButtons : MonoBehaviour
         player.ySens = volume;
     }
 
+    public void resumeGame()
+    {
+        PlayerUIHandler.pauseState(false);
+        
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        gameStateManager.resumeGame();
+    }
+
 }

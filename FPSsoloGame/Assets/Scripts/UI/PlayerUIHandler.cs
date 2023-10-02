@@ -12,12 +12,25 @@ public class PlayerUIHandler : MonoBehaviour
 
     private bool isPaused;
 
+    public delegate void changePause(bool arg);
+    public static changePause pauseState;
+
+    private void Awake()
+    {
+        pauseState = setPause;
+    }
+
     private void Start()
     {
         pauseMenu.SetActive(false);
         isPaused = false;
     }
 
+
+    private void setPause(bool arg)
+    {
+        isPaused = arg;
+    }
     void Update()
     {
 

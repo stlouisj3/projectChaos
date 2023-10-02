@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4739541837513720}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: traffic_warning_stand prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 33826894466235174}
   - component: {fileID: 23647109606776136}
   - component: {fileID: 114546492290055260}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: traffic_warning_stand
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -8,7 +8,7 @@ public class debris : MonoBehaviour
     private int dmg;
 
     [SerializeField]
-    private int speed;
+    private float speed;
 
     [SerializeField]
     private int disableTime = 2;

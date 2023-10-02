@@ -34,7 +34,16 @@ public class RunState : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(agent != null) { 
+        if (!gameStateManager.currState())
+        {
+            animator.speed = 0f;
+            agent.isStopped = true;
+        }
+        else
+        {
+            animator.speed = 1f;
+        
+        if (agent != null) { 
         dis = Vector3.Distance(player.position, animator.transform.position);
         agent.isStopped = false;
         agent.SetDestination(player.position);
@@ -54,6 +63,7 @@ public class RunState : StateMachineBehaviour
 
 
        }
+        }
 
 
 

@@ -44,13 +44,17 @@ public class playerHealth : MonoBehaviour
         }
         else if(arg > 0)
         {
-            health += arg;
-            StartCoroutine(AmmoUI.updateHealth(health, maxHealth,false));
-            StartCoroutine(enableInvince(1));
-        }else if(arg < 0)
-        {
             if (health > maxHealth)
                 health = maxHealth;
+            else
+                health += arg;
+            StartCoroutine(AmmoUI.updateHealth(health, maxHealth,false));
+            
+
+        }else if(arg < 0)
+        {
+            health += arg;
+            StartCoroutine(enableInvince(1));
             StartCoroutine(AmmoUI.updateHealth(health, maxHealth,true));
             audioSfx.PlayPlayerSound("playerHurt", 1);
         }

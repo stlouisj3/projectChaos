@@ -16,7 +16,14 @@ public class AttackState : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        if (!gameStateManager.currState())
+        {
+            animator.speed = 0f;
+        }
+        else
+        {
+            animator.speed = 1f;
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

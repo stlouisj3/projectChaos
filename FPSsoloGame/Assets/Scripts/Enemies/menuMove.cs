@@ -34,7 +34,8 @@ public class menuMove : MonoBehaviour
 
                 if(Vector3.Distance(this.gameObject.transform.position,movingPoints[point].position) > .01)
                 {
-                    
+
+                    this.gameObject.transform.rotation = Quaternion.Lerp(this.gameObject.transform.rotation, movingPoints[point].rotation, speed);
                     this.gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, movingPoints[point].position,speed);
                     yield return new WaitForEndOfFrame();
                 }
