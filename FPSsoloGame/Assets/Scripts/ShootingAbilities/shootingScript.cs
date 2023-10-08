@@ -88,9 +88,9 @@ public class shootingScript : MonoBehaviour
         while(gameStateManager.currState())
         {
             
-            if (input.getShoot() == 1)
+            if (input.getShoot() == 1 && gun != null)
             {
-                if (gun.dualWeild && !dualShoot)
+                if (gun.dualWeild && !dualShoot )
                 {
                     StartCoroutine(shoot(barrelDual, false));
                 }
@@ -101,17 +101,17 @@ public class shootingScript : MonoBehaviour
 
             }
 
-            if (input.getRightShoot() == 1 && gun.dualWeild && !shooting)
+            if (input.getRightShoot() == 1 && gun.dualWeild && !shooting && gun != null)
             {
                 StartCoroutine(shoot(barrel, true));
             }
 
-            if (input.getReload())
+            if (input.getReload() && gun != null)
             {
                 StartCoroutine(reload());
             }
 
-            if (input.getSwitch())
+            if (input.getSwitch() && gun != null)
             {
                 StartCoroutine(switchGuns());
             }
@@ -174,7 +174,8 @@ public class shootingScript : MonoBehaviour
                     gunsDual[gun1Ind].SetActive(true);
                     gun1.dualAmmo = gun1.clipSize;
                     AmmoUI.dualOn();
-                    AmmoUI.dualWeildAmmo(gun1.dualAmmo);
+                    AmmoUI.dualWeildAmmo(gun.dualAmmo);
+                    //AmmoUI.dualWeildAmmo(gun1.dualAmmo);
                     barrelDual = barrelsDual[gun1Ind];
                     ani2 = gunsDual[gun1Ind].GetComponent<Animator>();
                 }
@@ -182,6 +183,11 @@ public class shootingScript : MonoBehaviour
                 {
                     gunsDual[gun1Ind].SetActive(false);
                     AmmoUI.dualOff();
+                }
+
+                if (gun2.dualWeild)
+                {
+                    gun2.dualAmmo = gun2.clipSize;
                 }
 
             }else if (gun2.gunFBX.name == guns[i].name)

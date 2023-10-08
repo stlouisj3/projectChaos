@@ -22,6 +22,9 @@ public class controllerCursor : MonoBehaviour
     [SerializeField]
     private float padding = 35f;
 
+    [SerializeField]
+    private bool mainMenu;
+
     private bool previousMouseState;
     private Mouse virtualMouse;
     private Mouse currentMouse;
@@ -65,10 +68,12 @@ public class controllerCursor : MonoBehaviour
 
     private void OnDisable()
     {
+        if (!mainMenu) { 
         if(virtualMouse != null && virtualMouse.added)
             InputSystem.RemoveDevice(virtualMouse);
         InputSystem.onAfterUpdate -= UpdateMotion;
         playInput.onControlsChanged -= OnControlChanged;
+        }
     }
 
     private void UpdateMotion()

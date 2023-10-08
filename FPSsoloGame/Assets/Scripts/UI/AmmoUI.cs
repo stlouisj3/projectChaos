@@ -133,11 +133,11 @@ public class AmmoUI : MonoBehaviour
     {
         if (arg)
         {
-            ability1.color = Color.green;
+            ability1.color = opaq;
         }
         else
         {
-            ability1.color = Color.red;
+            ability1.color = trans;
         }
     }
 
@@ -147,11 +147,11 @@ public class AmmoUI : MonoBehaviour
 
         if (arg)
         {
-            ability2.color = Color.green;
+            ability2.color = opaq;
         }
         else
         {
-            ability2.color = Color.red;
+            ability2.color = trans;
         }
     }
 

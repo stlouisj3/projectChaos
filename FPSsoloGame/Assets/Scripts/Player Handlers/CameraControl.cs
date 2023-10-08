@@ -50,16 +50,16 @@ public class CameraControl : MonoBehaviour
     {
         while (gameStateManager.currState())
         {
-        float mouseX = input.getLook().x * Time.deltaTime * player.xSens;
-        float mouseY = input.getLook().y * Time.deltaTime * player.ySens;
+        float mouseX = input.getLook().x * Time.deltaTime * sensX;
+        float mouseY = input.getLook().y * Time.deltaTime * sensY;
 
         yRotation += mouseX;
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-
+            //print(sensX + " " + sensY);
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
-            yield return new WaitForFixedUpdate();
+        yield return new WaitForFixedUpdate();
         }
         
     }

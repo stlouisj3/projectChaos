@@ -228,7 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orientation: {fileID: 0}
   input: {fileID: 0}
-  player: {fileID: 11400000, guid: d0124417578dcb149aec47429777a69b, type: 2}
+  player: {fileID: 11400000, guid: 4bc9b4f8eea1c5d49bb308befe58e8a1, type: 2}
 --- !u!1 &829000843343111760
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,7 +19,10 @@ public class audioManager : MonoBehaviour
     private float waitLen;
     private int clipPlay;
 
-    
+    [SerializeField]
+    private AudioMixerSnapshot gamePlane;
+    [SerializeField]
+    private AudioMixerSnapshot freezePlane;
 
     private void Awake()
     {
@@ -204,5 +207,15 @@ public class audioManager : MonoBehaviour
     public void resumeSFX()
     {
         sfxSource.UnPause();
+    }
+
+    public void setGameSnap(float time)
+    {
+        gamePlane.TransitionTo(time);
+    }
+
+    public void setFreezeSnap(float time)
+    {
+        freezePlane.TransitionTo(time);
     }
 }

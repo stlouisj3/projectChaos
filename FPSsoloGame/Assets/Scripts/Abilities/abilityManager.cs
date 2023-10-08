@@ -251,16 +251,20 @@ public class abilityManager : MonoBehaviour
     {
         StartCoroutine(stopTime());
         ready1 = false;
-        StartCoroutine(coolDownAbil1(freezeCoolDown));
+        StartCoroutine(coolDownAbil1(freezeCoolDown + pauseTime));
     }
 
     IEnumerator stopTime()
     {
+        audio.setFreezeSnap(.5f);
         effect.saturation.value = greySat;
+        
         animationController.stopTime(true);
         navMeshFix.changeNav(false);
         
         yield return new WaitForSeconds(pauseTime);
+        audio.setGameSnap(.5f);
+        yield return new WaitForSeconds(.5f);
         effect.saturation.value = startSat;
         animationController.stopTime(false);
         navMeshFix.changeNav(true);

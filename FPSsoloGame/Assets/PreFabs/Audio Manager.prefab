@@ -1144,3 +1144,7 @@ MonoBehaviour:
   ability2Source: {fileID: 6614469574849768511}
   playerSource: {fileID: 6614469575661038544}
   mixer: {fileID: 24100000, guid: 17f5ff5479d8a9943ba60ea295cd245a, type: 2}
+  gamePlane: {fileID: 2784108381706992505, guid: 17f5ff5479d8a9943ba60ea295cd245a,
+    type: 2}
+  freezePlane: {fileID: -3564090578428899952, guid: 17f5ff5479d8a9943ba60ea295cd245a,
+    type: 2}
