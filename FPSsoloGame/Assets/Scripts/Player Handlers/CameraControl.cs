@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.InputSystem.Users;
 
 public class CameraControl : MonoBehaviour
 {
@@ -18,6 +21,13 @@ public class CameraControl : MonoBehaviour
 
     [SerializeField]
     private InputManager input;
+
+    [SerializeField]
+    private PlayerInput controls;
+
+    private string previousControlScheme = "";
+    private const string gamepadScheme = "GamePad";
+    private const string mouseScheme = "Controls";
 
     public PlayerSaveData player;
 
@@ -50,6 +60,18 @@ public class CameraControl : MonoBehaviour
     {
         while (gameStateManager.currState())
         {
+            /*Debug.Log(controls.currentControlScheme);
+            if (controls.currentControlScheme == gamepadScheme && previousControlScheme != gamepadScheme)
+            {
+                Debug.Log("Controller Using");
+                previousControlScheme = gamepadScheme;
+            }else if(controls.currentControlScheme == mouseScheme && previousControlScheme != mouseScheme)
+            {
+
+                Debug.Log("Mouse Using");
+
+                previousControlScheme = mouseScheme;
+            }*/
         float mouseX = input.getLook().x * Time.deltaTime * sensX;
         float mouseY = input.getLook().y * Time.deltaTime * sensY;
 

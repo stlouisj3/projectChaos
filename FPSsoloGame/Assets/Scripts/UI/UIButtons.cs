@@ -130,4 +130,9 @@ public class UIButtons : MonoBehaviour
         gameStateManager.resumeGame();
     }
 
+    public void quitGame()
+    {
+        Application.Quit();
+    }
+
 }

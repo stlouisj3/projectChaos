@@ -325,7 +325,7 @@
                 {
                     "name": "",
                     "id": "16128997-0332-46eb-bae0-1f80cd2a21c8",
-                    "path": "<Gamepad>/select",
+                    "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": "GamePad",
@@ -340,6 +340,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controls",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "15586781-f0a4-4432-81da-9646d83290ce",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
