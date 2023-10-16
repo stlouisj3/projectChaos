@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef2c24025c6f64a4caf92f963f4163a5, type: 3}
   m_Name: PlayerSave
   m_EditorClassIdentifier: 
-  xSens: 500
-  ySens: 500
+  xSens: 15
+  ySens: 13
   masterVol: 0
   musicVol: -26.1
   sfxVol: -26.1

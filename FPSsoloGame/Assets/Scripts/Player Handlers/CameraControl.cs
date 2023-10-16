@@ -28,6 +28,8 @@ public class CameraControl : MonoBehaviour
     private string previousControlScheme = "";
     private const string gamepadScheme = "GamePad";
     private const string mouseScheme = "Controls";
+    private int controlerRate = 25;
+    private int rate = 1;
 
     public PlayerSaveData player;
 
@@ -56,24 +58,36 @@ public class CameraControl : MonoBehaviour
     {
         StartCoroutine(camCon());
     }
+
+    private void OnControlChanged(PlayerInput arg)
+    {
+        if (controls.currentControlScheme == gamepadScheme && previousControlScheme != gamepadScheme)
+        {
+            Debug.Log("Controller Using");
+            rate = controlerRate;
+            previousControlScheme = gamepadScheme;
+        }
+        else if (controls.currentControlScheme == mouseScheme && previousControlScheme != mouseScheme)
+        {
+
+            Debug.Log("Mouse Using");
+            rate = 1;
+            previousControlScheme = mouseScheme;
+        }
+    }
     IEnumerator camCon()
     {
         while (gameStateManager.currState())
         {
-            /*Debug.Log(controls.currentControlScheme);
-            if (controls.currentControlScheme == gamepadScheme && previousControlScheme != gamepadScheme)
-            {
-                Debug.Log("Controller Using");
-                previousControlScheme = gamepadScheme;
-            }else if(controls.currentControlScheme == mouseScheme && previousControlScheme != mouseScheme)
-            {
 
-                Debug.Log("Mouse Using");
-
-                previousControlScheme = mouseScheme;
-            }*/
-        float mouseX = input.getLook().x * Time.deltaTime * sensX;
-        float mouseY = input.getLook().y * Time.deltaTime * sensY;
+            if (previousControlScheme != controls.currentControlScheme)
+            {
+                OnControlChanged(controls);
+            }
+            previousControlScheme = controls.currentControlScheme;
+            
+        float mouseX = input.getLook().x * Time.deltaTime * player.xSens * rate;
+        float mouseY = input.getLook().y * Time.deltaTime * player.ySens * rate;
 
         yRotation += mouseX;
         xRotation -= mouseY;
