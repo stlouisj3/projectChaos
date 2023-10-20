@@ -26,8 +26,8 @@ public class CameraControl : MonoBehaviour
     private PlayerInput controls;
 
     private string previousControlScheme = "";
-    private const string gamepadScheme = "GamePad";
-    private const string mouseScheme = "Controls";
+    private const string gamepadScheme = "Gamepad";
+    private const string mouseScheme = "Keyboard&Mouse";
     private int controlerRate = 25;
     private int rate = 1;
 

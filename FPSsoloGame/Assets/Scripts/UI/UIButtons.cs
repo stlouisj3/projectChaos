@@ -36,8 +36,11 @@ public class UIButtons : MonoBehaviour
 
     private void Awake()
     {
-        mixer.SetFloat("SFXVol", player.sfxVol);
+        if(mixer != null) { 
+            mixer.SetFloat("SFXVol", player.sfxVol);
         mixer.SetFloat("MusicVol", player.musicVol);
+        }
+        
     }
 
     private void OnEnable()

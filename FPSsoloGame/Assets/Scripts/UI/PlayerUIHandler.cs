@@ -10,7 +10,11 @@ public class PlayerUIHandler : MonoBehaviour
     [SerializeField]
     private GameObject pauseMenu;
 
+    
+
     private bool isPaused;
+
+   
 
     public delegate void changePause(bool arg);
     public static changePause pauseState;
@@ -18,12 +22,14 @@ public class PlayerUIHandler : MonoBehaviour
     private void Awake()
     {
         pauseState = setPause;
+        
     }
 
     private void Start()
     {
         pauseMenu.SetActive(false);
         isPaused = false;
+        
     }
 
 
@@ -44,10 +50,12 @@ public class PlayerUIHandler : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 gameStateManager.resumeGame();
+                
             }
             else
             {
                 isPaused = true;
+                
                 pauseMenu.SetActive(true);
                 Cursor.lockState = CursorLockMode.Confined;
                 Cursor.visible = true;
