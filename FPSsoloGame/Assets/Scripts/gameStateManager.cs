@@ -62,7 +62,7 @@ public class gameStateManager : MonoBehaviour
         play = false;
         if(audio != null)
             audio.pauseMusic();
-        roundManager.stopSpawn();
+        //roundManager.stopSpawn();
         animationController.stopTime(true);
         navMeshFix.changeNav(false);
         
@@ -82,7 +82,7 @@ public class gameStateManager : MonoBehaviour
         shootingScript.startShoot();
         CameraControl.camMove();       
         StartCoroutine(audio.resumeShuffle());
-        roundManager.continueSpawn();
+        //roundManager.continueSpawn();
         abilityManager.getInput();
         animationController.stopTime(false);
         navMeshFix.changeNav(true);

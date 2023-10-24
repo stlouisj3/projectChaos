@@ -95,6 +95,10 @@ public class roundManager : MonoBehaviour
     
     private void startRound()
     {
+        int enemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        if (enemies != 0)
+            return;
+
         audio.PlaySFX("newRound");
         round++;
         enemiesDead = 0;
@@ -110,6 +114,8 @@ public class roundManager : MonoBehaviour
     {
         while(enemiesSpawned < maxSpawn)
         {
+            
+            if (gameStateManager.currState()) {               
             yield return new WaitForSeconds(timeToSpawn);
             
             areaSpawn = Random.Range(0, areasOpen);
@@ -120,7 +126,7 @@ public class roundManager : MonoBehaviour
 
             pool.SpawnFromPool(enemyNames[enemyType], spawnTrans.position, Quaternion.identity);
             enemiesSpawned = enemiesSpawned + 1;
-
+            }
         }
             
         
