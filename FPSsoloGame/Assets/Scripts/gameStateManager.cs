@@ -7,6 +7,7 @@ using UnityEngine.InputSystem.UI;
 public class gameStateManager : MonoBehaviour
 {
     private bool play;
+    private bool gameStarted;
 
     public delegate bool playstate();
     public static playstate currState;
@@ -29,6 +30,7 @@ public class gameStateManager : MonoBehaviour
 
     IEnumerator Start()
     {
+        gameStarted = false;
         audio = audioManager.Instance;
         play = true;
         deathScreen.SetActive(false);
@@ -37,7 +39,11 @@ public class gameStateManager : MonoBehaviour
         resumeGame = resume;
         pauseGame = pause;
         dead = death;
+        play = true;
+        roundManager.startRounds();
         resume();
+        
+        
 
         
     }
@@ -62,7 +68,7 @@ public class gameStateManager : MonoBehaviour
         play = false;
         if(audio != null)
             audio.pauseMusic();
-        //roundManager.stopSpawn();
+        roundManager.stopSpawn();
         animationController.stopTime(true);
         navMeshFix.changeNav(false);
         
@@ -82,7 +88,10 @@ public class gameStateManager : MonoBehaviour
         shootingScript.startShoot();
         CameraControl.camMove();       
         StartCoroutine(audio.resumeShuffle());
-        //roundManager.continueSpawn();
+        if (gameStarted)
+            roundManager.continueSpawn();
+        else
+            gameStarted = true;
         abilityManager.getInput();
         animationController.stopTime(false);
         navMeshFix.changeNav(true);

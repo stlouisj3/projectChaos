@@ -102,7 +102,7 @@ MonoBehaviour:
   startHealth: 50
   survival: 1
   healthDropPerc: 0
-  ammoDropPerc: 100
+  ammoDropPerc: 25
 --- !u!114 &2204366189170726628
 MonoBehaviour:
   m_ObjectHideFlags: 0

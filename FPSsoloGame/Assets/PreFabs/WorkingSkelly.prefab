@@ -759,7 +759,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHealth: 50
   survival: 1
-  healthDropPerc: 100
+  healthDropPerc: 20
   ammoDropPerc: 0
 --- !u!1 &5475164662330814920
 GameObject:

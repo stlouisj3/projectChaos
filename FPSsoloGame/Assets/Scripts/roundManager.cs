@@ -67,12 +67,14 @@ public class roundManager : MonoBehaviour
     public static roundStates enemyCheck;
     public static roundStates stopSpawn;
     public static roundStates continueSpawn;
+    public static roundStates startRounds;
 
     private void Start()
     {
         enemyCheck += enemyDied;
         stopSpawn = pauseSpawning;
         continueSpawn = resumeSpawning;
+        startRounds = startRound;
         pool = ObjectPool.Instance;
         audio = audioManager.Instance;
     }
@@ -80,7 +82,7 @@ public class roundManager : MonoBehaviour
     void OnEnable()
     {
         
-        round = 1;
+        round = 0;
         maxSpawn = startSpawn;
         areas[0].open = true;
         areasOpen = 0;
@@ -89,7 +91,7 @@ public class roundManager : MonoBehaviour
         enemiesDead = 0;
         enemiesSpawned = 0;
         roundUI.text = round.ToString();
-        //startRound();
+        
     }
 
     
@@ -98,8 +100,9 @@ public class roundManager : MonoBehaviour
         int enemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
         if (enemies != 0)
             return;
-
-        audio.PlaySFX("newRound");
+        if(audio != null)
+            audio.PlaySFX("newRound");
+        
         round++;
         enemiesDead = 0;
         enemiesSpawned =  0;
@@ -111,11 +114,11 @@ public class roundManager : MonoBehaviour
     }
 
     IEnumerator spawn()
-    {
-        while(enemiesSpawned < maxSpawn)
+    {       
+        while(enemiesSpawned < maxSpawn && gameStateManager.currState())
         {
             
-            if (gameStateManager.currState()) {               
+            
             yield return new WaitForSeconds(timeToSpawn);
             
             areaSpawn = Random.Range(0, areasOpen);
@@ -123,10 +126,11 @@ public class roundManager : MonoBehaviour
             spawnPoint = Random.Range(0, pointsToSpawn);
             spawnTrans = areas[areaSpawn].spawnPoints[spawnPoint];
             enemyType = Random.Range(0, enemyNames.Count);
-
-            pool.SpawnFromPool(enemyNames[enemyType], spawnTrans.position, Quaternion.identity);
             enemiesSpawned = enemiesSpawned + 1;
-            }
+            pool.SpawnFromPool(enemyNames[enemyType], spawnTrans.position, Quaternion.identity);
+            print(enemiesSpawned);
+            
+            
         }
             
         

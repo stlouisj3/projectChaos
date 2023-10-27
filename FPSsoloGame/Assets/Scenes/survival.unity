@@ -41312,6 +41312,11 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 576303099311738746, guid: 77d71e0044698254e857360ea7d64429,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 576303099311738748, guid: 77d71e0044698254e857360ea7d64429,
         type: 3}
       propertyPath: m_Sprite
@@ -43342,6 +43347,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Audio Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6614469576338548399, guid: 7850a222f2692664ba1fd9bdca5b52ba,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7850a222f2692664ba1fd9bdca5b52ba, type: 3}
