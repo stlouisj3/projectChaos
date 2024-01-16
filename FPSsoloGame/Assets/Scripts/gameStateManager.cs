@@ -8,7 +8,7 @@ public class gameStateManager : MonoBehaviour
 {
     private bool play;
     private bool gameStarted;
-
+    
     public delegate bool playstate();
     public static playstate currState;
 
@@ -41,11 +41,7 @@ public class gameStateManager : MonoBehaviour
         dead = death;
         play = true;
         roundManager.startRounds();
-        resume();
-        
-        
-
-        
+        resume();       
     }
 
    
@@ -56,15 +52,16 @@ public class gameStateManager : MonoBehaviour
 
     private void pause()
     {
+        Time.timeScale = 0.0f;
         /*if(UIsystem!= null)
         {
             UIsystem.actionsAsset = uiInput.asset;
             UIsystem.point = InputActionReference.Create(uiInput.UI.Point);
             UIsystem.leftClick = InputActionReference.Create(uiInput.UI.Click);
         }*/
-            
 
-        
+
+
         play = false;
         if(audio != null)
             audio.pauseMusic();
@@ -77,6 +74,7 @@ public class gameStateManager : MonoBehaviour
 
     private void resume()
     {
+        Time.timeScale = 1.0f;
         play = true;
         /*if (UIsystem != null)
         {
@@ -100,11 +98,19 @@ public class gameStateManager : MonoBehaviour
 
     private void death()
     {
+        Time.timeScale = 0.0f;
         play = false;
-        pause();
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
+        if (audio == null)
+        {
+            audio = audioManager.Instance; 
+        }
+        
+        
+        //pause();        
+        Cursor.lockState = CursorLockMode.Confined;       
+        Cursor.visible = true;        
         deathScreen.SetActive(true);
+        
     }
 
     IEnumerator resumeFix()

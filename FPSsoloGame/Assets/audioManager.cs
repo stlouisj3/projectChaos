@@ -204,6 +204,12 @@ public class audioManager : MonoBehaviour
         
     }
 
+    public void muteSFX()
+    {
+        print("MUte sfx");
+        sfxSource.volume = 0;
+    }
+
     public void resumeSFX()
     {
         sfxSource.UnPause();

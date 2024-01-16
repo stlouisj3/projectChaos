@@ -17,6 +17,7 @@ public class shootingScript : MonoBehaviour
 
     private bool shooting;
     private bool dualShoot;
+    private bool reloading;
 
     [SerializeField]
     private InputManager input;
@@ -63,6 +64,7 @@ public class shootingScript : MonoBehaviour
     public static turnOff gunsOff;
     public static turnOff addAmmo;
 
+    
     void Start()
     {
         audio = audioManager.Instance;
@@ -71,11 +73,12 @@ public class shootingScript : MonoBehaviour
         dualShoot = false;
         gun1 = gunClass.gun1;
         gun2 = gunClass.gun2;
-
+        reloading = false;
         setGuns();
         startShoot = shootCheck;
         gunsOff = noGuns;
         addAmmo = addResAmmo;
+        hitmarker.SetActive(false);
     }
 
     private void shootCheck()
@@ -88,7 +91,7 @@ public class shootingScript : MonoBehaviour
         while(gameStateManager.currState())
         {
             
-            if (input.getShoot() == 1 && gun != null)
+            if (input.getShoot() == 1 && gun != null && !reloading)
             {
                 if (gun.dualWeild && !dualShoot )
                 {
@@ -101,13 +104,18 @@ public class shootingScript : MonoBehaviour
 
             }
 
-            if (input.getRightShoot() == 1 && gun.dualWeild && !shooting && gun != null)
+            if(input.getRightShoot() == 1 && !gun.dualWeild)
+            {
+
+            }
+            else if (input.getRightShoot() == 1 && gun.dualWeild && !shooting && gun != null && !reloading)
             {
                 StartCoroutine(shoot(barrel, true));
             }
 
-            if (input.getReload() && gun != null)
+            if (input.getReload() && gun != null && !reloading && gun.currAmmo != gun.clipSize)
             {
+                reloading = true;
                 StartCoroutine(reload());
             }
 
@@ -289,7 +297,7 @@ public class shootingScript : MonoBehaviour
             }
             
             audio.PlayGun(gun.gunSound);
-            //pool.SpawnFromPool("MuzzleFlash", actBarrel.position, Quaternion.identity);
+            pool.SpawnFromPool("MuzzleFlash", actBarrel.position, Quaternion.identity);
             if (gun.isShotgun)
             {
                 for (int i = 0; i < Mathf.Max(1, gun.pelletsPerSpread); i++)
@@ -323,50 +331,14 @@ public class shootingScript : MonoBehaviour
 
                     if (hit.collider.CompareTag("Enemy"))
                     {
-                        //StartCoroutine(callHitmarker());
+                        StartCoroutine(callHitmarker());
+                        //hit.collider.TryGetComponent<EnemyHealth>().takeDamage(gun.dmg);
                         hit.collider.GetComponent<EnemyHealth>().takeDamage(gun.dmg);
                     }
                 }
             }
             yield return new WaitForSeconds(gun.fireRate);
-            /*if (gun.dualWeild)
-            {
-                if (input.getShoot() == 1)
-                {
-                    StartCoroutine(shoot(barrelDual, false));
-                }
-                else
-                {
-                    dualShoot = false;
-                }
-
-                if (input.getRightShoot() == 1 && gun.dualWeild)
-                {
-                    StartCoroutine(shoot(barrel, true));
-                }
-                else
-                {
-                    shooting = false;
-                }
-
-            }
-            else
-            {
-                if (input.getShoot() == 1)
-                {
-                    StartCoroutine(shoot(barrel, true));
-                }
-                else
-                {
-                    shooting = false;
-                }
-            }
-
             
-            
-        }
-        else
-        {*/
             if (isRight)
             {
                 shooting = false;
@@ -379,7 +351,7 @@ public class shootingScript : MonoBehaviour
         }
         else
         {
-            StartCoroutine(reload());
+            //StartCoroutine(reload());
         }
     }
 
@@ -397,7 +369,7 @@ public class shootingScript : MonoBehaviour
         guns[gun1Ind].SetActive(false);
         gunsDual[gun2Ind].SetActive(false);
         gunsDual[gun1Ind].SetActive(false);
-
+        if(reloading) reloading = false; 
         yield return new WaitForSeconds(time);
 
         setGuns();
@@ -456,8 +428,9 @@ public class shootingScript : MonoBehaviour
             }
             AmmoUI.dualWeildAmmo(gun.dualAmmo);
         }
+        AmmoUI.resAmmo(gun.reserveAmmo);
         AmmoUI.currentAmmo(gun.currAmmo);
-        
+        reloading = false;
 
     }
 

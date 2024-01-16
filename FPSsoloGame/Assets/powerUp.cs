@@ -7,7 +7,7 @@ public class powerUp : MonoBehaviour
     [SerializeField]
     powerUpType type;
 
-    private void OnCollisionEnter(Collision coll)
+    private void OnTriggerEnter(Collider coll)
     {
         if (coll.gameObject.CompareTag("Player"))
         {
@@ -26,4 +26,6 @@ public class powerUp : MonoBehaviour
             this.gameObject.SetActive(false);
         }
     }
+
+    
 }

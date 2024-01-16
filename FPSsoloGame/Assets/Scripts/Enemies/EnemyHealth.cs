@@ -20,7 +20,7 @@ public class EnemyHealth : MonoBehaviour
 
     private Vector3 dropTrans;
 
-
+    private roundManager round;
 
     private int health;
 
@@ -37,6 +37,8 @@ public class EnemyHealth : MonoBehaviour
         incHealth = IncStrtHealth;
         pool = ObjectPool.Instance;
         audio = audioManager.Instance;
+        if(round == null)
+            round = FindObjectOfType<roundManager>();
     }
     private void OnEnable()
     {
@@ -59,8 +61,8 @@ public class EnemyHealth : MonoBehaviour
             isDead = true;
             if (survival)
             {
-                
-                roundManager.enemyCheck();
+                round.enemyDied();
+                //roundManager.enemyCheck();
             }
             //audio.PlaySFX("emyDeath");
             pool.SpawnFromPool("DeathPart", this.transform.position, Quaternion.identity);

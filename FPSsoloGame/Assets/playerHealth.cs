@@ -37,17 +37,18 @@ public class playerHealth : MonoBehaviour
 
     private void changeHealth(int arg)
     {
-        
-        if(arg < 0 && invinceAble)
+        Debug.Log(arg);
+        if(invinceAble)
         {
-            
+            return;
         }
         else if(arg > 0)
         {
+            health += arg;
             if (health > maxHealth)
                 health = maxHealth;
-            else
-                health += arg;
+            
+                
             StartCoroutine(AmmoUI.updateHealth(health, maxHealth,false));
             
 
@@ -56,7 +57,8 @@ public class playerHealth : MonoBehaviour
             health += arg;
             StartCoroutine(enableInvince(1));
             StartCoroutine(AmmoUI.updateHealth(health, maxHealth,true));
-            audioSfx.PlayPlayerSound("playerHurt", 1);
+            if(health > 0)
+                audioSfx.PlayPlayerSound("playerHurt", 1);
         }
         
         if(health < 0)
@@ -67,7 +69,9 @@ public class playerHealth : MonoBehaviour
 
     private void restoreHealth(int arg)
     {
-        health = maxHealth;
+        //health = maxHealth;
+        int up = maxHealth - health;
+        changeHealth(999);
         StartCoroutine(enableInvince(arg));
     }
 

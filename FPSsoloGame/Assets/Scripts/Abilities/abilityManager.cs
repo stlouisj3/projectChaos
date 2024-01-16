@@ -227,10 +227,10 @@ public class abilityManager : MonoBehaviour
 
     private void conqHaki()
     {
-        
-        audio.Playability2("conq");
+        if(audio != null)
+            audio.Playability2("conq");
         StartCoroutine(conqEffect());
-        animationController.stumble(true);
+        //animationController.stumble(true);
         ready2 = false;
         StartCoroutine(coolDownAbil2(hakiCoolDown));
     }

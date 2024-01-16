@@ -167,7 +167,7 @@ public class roundManager : MonoBehaviour
         startRound();
     }
 
-    private void enemyDied()
+    public void enemyDied()
     {
 
         enemiesDead++;

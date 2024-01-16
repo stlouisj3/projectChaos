@@ -694,7 +694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9456e694c54e36c4dbff4c6e9e13f0b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 100
+  dmg: 50
 --- !u!114 &690504548394949219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -709,6 +709,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHealth: 500
   survival: 1
+  healthDropPerc: 0
+  ammoDropPerc: 0
 --- !u!114 &2412504717716728290
 MonoBehaviour:
   m_ObjectHideFlags: 0

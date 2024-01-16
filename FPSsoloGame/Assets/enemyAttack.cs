@@ -10,13 +10,13 @@ public class enemyAttack : MonoBehaviour
     Transform player;
     float dis;
 
-    public void meleeAttack()
+    public void meleeAttack(int arg)
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         dis = Vector3.Distance(player.position, transform.position);
         if(dis < 2)
         {
-            playerHealth.upHealth(-50);
+            playerHealth.upHealth(-arg);
         }
     }
 }

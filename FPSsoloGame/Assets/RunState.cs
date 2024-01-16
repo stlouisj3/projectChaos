@@ -27,6 +27,10 @@ public class RunState : StateMachineBehaviour
         agent = animator.GetComponent<NavMeshAgent>();
         if(agent == null)
             agent = animator.GetComponentInParent<NavMeshAgent>();
+        if(agent == null)
+            agent = animator.GetComponentInChildren<NavMeshAgent>();
+        if (agent == null)
+            Debug.Log($"Agent is null");
         player = GameObject.FindGameObjectWithTag("Player").transform;
         
     }

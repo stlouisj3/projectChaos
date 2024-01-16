@@ -75,6 +75,7 @@ public class UIButtons : MonoBehaviour
     IEnumerator sceneTransition(int arg)
     {
         loadingScreen.SetActive(true);
+        Time.timeScale = 1.0f;
         yield return new WaitForSeconds(3);
         AsyncOperation operation = SceneManager.LoadSceneAsync(arg);
         
